@@ -1,0 +1,17 @@
+# 29 08 lecture 
+
+little (0 to 5) and big (0 to ) endian concept , its defined by my system (design declaration)
+
+use strict;
+
+on test bench, there is no sequential code, and its a experimental enviroment 
+
+
+file .vcd (data/table review)
+
+
+#decofificador module scripts and test bench
+#contador module scripts and test bench 
+
+# 7 segmentos: cátodo comun o ánodo comun; change 0 to 1 (active high flag)
+

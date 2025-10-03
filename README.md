@@ -27,17 +27,17 @@ including:
 ## Repository Structure
 
 DigitalDesignLR/  
-├── code/ # Verilog modules and testbenches just to proof  
-│ ├── accreg8bit.v  
-│ └── ...  
 │  
 ├── content/ # Class material (ppt, books, pdfs)  
 │ └── classContent/  
+│ ├── code/ # Verilog modules and testbenches just to proof  
+│ ├── lectures/
+│ └── ...  
 │ ├── 01 - Digital Design.pdf  
 │ └── ...  
 │  
-├── devEnv/ # Scripts and testing environments to deliver
-│ ├── 1stCode/ # First projects  
+├── devEnv/ # Scripts and testing environments , als work to deliver
+│ ├── work/ # First projects  
 │ └── sim/ # Simulation scripts  
 │ └── ...  
 │
@@ -73,7 +73,8 @@ all inside content dir
 ## Roadmap
 
 - [x] Create README base
-- [ ] Structure repository
+- [x] Structure repository
+- [ ] Develompent environment tasks
 
 ---
 
