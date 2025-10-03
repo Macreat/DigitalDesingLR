@@ -1,0 +1,59 @@
+# 05 09 lecture 
+
+analogy between FET and RAM architecture 
+    
+    CPLe & PAL (programmable array logic) are chips 
+    were doesnt count many life ciles 
+
+    FPGA SOLVE THIS problem... sOc (system on chip) architecture
+
+
+Some industry chips :
+
+KRIA KR26 -> specialized on ROBOTIC and VISION
+
+Kria KD240 Drives Starter Kit
+
+# options to manage : 
+    1. use MCU t
+    2. use FPGA + MCU 
+    3. hybrid system (STATES machine,frecuency divider: "with a clkin and clkout w/ 1second
+    to this add a 4 bits counter with ENABLE, RESET and CNT; ensure the frecuency at 1hz", etc) 
+     
+
+     made a test bench for counter, frecuency divider, etc... "
+
+     for the tb on the frequency divider : simulate a lot of steps  (100millones de ciclos para ver el ciclo de salida)
+
+
+VIBADO And other develop interfaces, SEE MANAGEMENT 
+
+on this project, have to manage a restrictions file 
+clck for the chip (i can use two ), pulser (bottom) to RESET,swithc to ENABLE 
+and 4 leds
+
+intern clock for MCU 
+
+
+remember : pull up -> activate w/ 1. 
+P / down : -> defect on 0 
+
+
+----------------------------------------------------
+
+     # vivado AMD enviroment 
+
+first project on iverilog language
+
+ip integrator (understand block design and define mpogs)
+run Simulation 
+run LINTER -> isse analizer AND CREATE THE BLOCK DESIGN 
+
+the block design its about a layers: 
+    sequential and combitional 
+
+#beatstrim and synthesis design are the elevated computational process 
+# all sequential elements should share the same clock 
+after the block design confirm :
+
+run synthesis

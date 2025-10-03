@@ -1,0 +1,11 @@
+sudo apt install minicom (to UART protocols) 
+
+
+
+
+
+contraseña maquina virtual: linux 
+
+
+
+sudo minicom -D /dev/ttyUSB0 -s
