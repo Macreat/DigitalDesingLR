@@ -1,0 +1,19 @@
+digraph KnightRiderTop {
+  rankdir=LR;
+  node [shape=box];
+
+  counter [label="updown_counter4\nq[3:0]"]; 
+  fsm     [label="two_state_fsm\ndir"]; 
+  dec     [label="decoder3to8\nleds[7:0]"]; 
+
+  clk [shape=oval]; arst [shape=oval]; en [shape=oval]; leds [shape=oval];
+
+  clk -> counter; arst -> counter; en -> counter;
+  clk -> fsm;     arst -> fsm;
+
+  counter -> fsm  [label="pos=q[2:0]"];
+  fsm -> counter  [label="dir"];
+  counter -> dec  [label="sel=pos=q[2:0]"];
+  dec -> leds;
+}
+
