@@ -32,11 +32,11 @@ test: build/tb_decoder3to8.vvp build/tb_updown_counter4.vvp build/tb_two_state_f
 	$(VVP) build/tb_top_knightrider.vvp
 
 build:
-    mkdir -p build
-    mkdir -p results
+	mkdir -p build
+	mkdir -p results
 
 clean:
-    rm -rf build results
+	rm -rf build results
 
 # Generate VCD waves (uses `WAVES` macro in TBs)
 waves: build
