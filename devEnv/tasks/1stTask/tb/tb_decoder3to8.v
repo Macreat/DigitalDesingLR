@@ -5,6 +5,13 @@ module tb_decoder3to8;
 
     decoder3to8 dut(.sel(sel), .y(y));
 
+`ifdef WAVES
+    initial begin
+        $dumpfile("results/tb_decoder3to8.vcd");
+        $dumpvars(0, tb_decoder3to8);
+    end
+`endif
+
     integer i;
     initial begin
         $display("[tb_decoder3to8] Start");
@@ -19,4 +26,3 @@ module tb_decoder3to8;
         $finish;
     end
 endmodule
-

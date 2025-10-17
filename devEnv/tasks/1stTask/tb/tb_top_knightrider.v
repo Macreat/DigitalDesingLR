@@ -11,6 +11,13 @@ module tb_top_knightrider;
 
     initial clk = 0; always #5 clk = ~clk; // 100MHz simulated
 
+`ifdef WAVES
+    initial begin
+        $dumpfile("results/tb_top_knightrider.vcd");
+        $dumpvars(0, tb_top_knightrider);
+    end
+`endif
+
     // Check that pattern bounces: 0000_0001 -> ... -> 1000_0000 -> 0100_0000 -> ...
     reg [7:0] expected;
     integer i;
