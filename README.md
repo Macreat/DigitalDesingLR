@@ -45,9 +45,9 @@ DigitalDesignLR/
 
 ---
 
-## Projects and Modules
+## Projects and Modules description
 
-- **First project** → Four verilog modules (design and verification of a basic digital system divide into four modules, test benchs and a top level integration).
+- **First task** → Four verilog modules (design and verification of a basic digital system divide into four modules, test benchs and a top level integration).
 
 ---
 
