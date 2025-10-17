@@ -14,6 +14,13 @@ module tb_updown_counter4;
     initial clk = 0;
     always #5 clk = ~clk; // 100 MHz -> 10ns period (scaled)
 
+`ifdef WAVES
+    initial begin
+        $dumpfile("results/tb_updown_counter4.vcd");
+        $dumpvars(0, tb_updown_counter4);
+    end
+`endif
+
     initial begin
         $display("[tb_updown_counter4] Start");
         arst = 1; en = 0; dir = 1; @(posedge clk); #1;

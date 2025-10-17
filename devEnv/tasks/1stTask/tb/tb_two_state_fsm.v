@@ -10,6 +10,13 @@ module tb_two_state_fsm;
     initial clk = 0;
     always #5 clk = ~clk;
 
+`ifdef WAVES
+    initial begin
+        $dumpfile("results/tb_two_state_fsm.vcd");
+        $dumpvars(0, tb_two_state_fsm);
+    end
+`endif
+
     initial begin
         $display("[tb_two_state_fsm] Start");
         arst = 1; pos = 0; @(posedge clk); #1; arst = 0;
@@ -25,4 +32,3 @@ module tb_two_state_fsm;
         $finish;
     end
 endmodule
-
