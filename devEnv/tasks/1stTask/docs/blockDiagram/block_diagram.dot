@@ -1,0 +1,150 @@
+digraph KnightRiderTop {
+  graph [
+    rankdir=LR,
+    splines=ortho,
+    nodesep=1.1,
+    ranksep=1.25,
+    pad=0.35,
+    fontname="Helvetica",
+    bgcolor="#FFFFFF",
+    labelloc="t",
+    labeljust="l"
+  ];
+
+  node [
+    shape=plaintext,
+    fontname="Helvetica",
+    fontsize=11
+  ];
+
+  edge [
+    fontname="Helvetica",
+    fontsize=10,
+    arrowsize=0.85,
+    penwidth=1.3,
+    color="#334155",
+    fontcolor="#334155"
+  ];
+
+  subgraph cluster_top {
+    label=<
+      <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+        <TR>
+          <TD ALIGN="LEFT">
+            <B>top_knightrider</B><BR/>
+            <FONT POINT-SIZE="10">structural datapath overview</FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    >;
+    style="rounded,dashed";
+    color="#2563EB";
+    penwidth=1.5;
+
+    counter [label=<
+      <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#2563EB">
+        <TR><TD COLSPAN="2" BGCOLOR="#DBEAFE"><B>updown_counter4</B></TD></TR>
+        <TR><TD COLSPAN="2" ALIGN="LEFT"><FONT POINT-SIZE="9">async reset · sync enable</FONT></TD></TR>
+        <TR><TD BGCOLOR="#F8FAFC"><B>input</B></TD><TD BGCOLOR="#F8FAFC"><B>output</B></TD></TR>
+        <TR><TD PORT="clk" ALIGN="LEFT">clk</TD><TD PORT="count" ALIGN="LEFT">q[3:0]</TD></TR>
+        <TR><TD PORT="arst" ALIGN="LEFT">arst</TD><TD></TD></TR>
+        <TR><TD PORT="en" ALIGN="LEFT">en</TD><TD></TD></TR>
+        <TR><TD PORT="dir" ALIGN="LEFT">dir_in</TD><TD></TD></TR>
+      </TABLE>
+    >];
+
+    boundary [label=<
+      <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#2563EB">
+        <TR><TD COLSPAN="2" BGCOLOR="#DBEAFE"><B>position split</B></TD></TR>
+        <TR><TD COLSPAN="2" ALIGN="LEFT"><FONT POINT-SIZE="9">extract pos and flags</FONT></TD></TR>
+        <TR><TD BGCOLOR="#F8FAFC"><B>input</B></TD><TD BGCOLOR="#F8FAFC"><B>output</B></TD></TR>
+        <TR><TD PORT="count" ALIGN="LEFT">q[3:0]</TD><TD PORT="pos" ALIGN="LEFT">pos[2:0]</TD></TR>
+        <TR><TD></TD><TD PORT="flags" ALIGN="LEFT">pos==0, pos==7</TD></TR>
+      </TABLE>
+    >];
+
+    fsm [label=<
+      <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#2563EB">
+        <TR><TD COLSPAN="2" BGCOLOR="#DBEAFE"><B>two_state_fsm</B></TD></TR>
+        <TR><TD COLSPAN="2" ALIGN="LEFT"><FONT POINT-SIZE="9">RIGHT&rarr;LEFT @ pos==7<BR/>LEFT&rarr;RIGHT @ pos==0</FONT></TD></TR>
+        <TR><TD BGCOLOR="#F8FAFC"><B>input</B></TD><TD BGCOLOR="#F8FAFC"><B>output</B></TD></TR>
+        <TR><TD PORT="clk" ALIGN="LEFT">clk</TD><TD PORT="dir" ALIGN="LEFT">dir</TD></TR>
+        <TR><TD PORT="arst" ALIGN="LEFT">arst</TD><TD></TD></TR>
+        <TR><TD PORT="pos" ALIGN="LEFT">pos[2:0]</TD><TD></TD></TR>
+      </TABLE>
+    >];
+
+    dirlogic [label=<
+      <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#2563EB">
+        <TR><TD COLSPAN="2" BGCOLOR="#DBEAFE"><B>direction update</B></TD></TR>
+        <TR><TD COLSPAN="2" ALIGN="LEFT"><FONT POINT-SIZE="9">handle boundary flips</FONT></TD></TR>
+        <TR><TD BGCOLOR="#F8FAFC"><B>input</B></TD><TD BGCOLOR="#F8FAFC"><B>output</B></TD></TR>
+        <TR><TD PORT="dir" ALIGN="LEFT">dir</TD><TD PORT="next" ALIGN="LEFT">dir_next</TD></TR>
+        <TR><TD PORT="pos" ALIGN="LEFT">pos[2:0]</TD><TD></TD></TR>
+        <TR><TD COLSPAN="2" ALIGN="LEFT"><FONT POINT-SIZE="9">if dir==1 &amp; pos==7 =&gt; 0<BR/>elif dir==0 &amp; pos==0 =&gt; 1<BR/>else hold dir</FONT></TD></TR>
+      </TABLE>
+    >];
+
+    decoder [label=<
+      <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#2563EB">
+        <TR><TD COLSPAN="2" BGCOLOR="#DBEAFE"><B>decoder3to8</B></TD></TR>
+        <TR><TD COLSPAN="2" ALIGN="LEFT"><FONT POINT-SIZE="9">one-hot decode</FONT></TD></TR>
+        <TR><TD BGCOLOR="#F8FAFC"><B>input</B></TD><TD BGCOLOR="#F8FAFC"><B>output</B></TD></TR>
+        <TR><TD PORT="sel" ALIGN="LEFT">pos[2:0]</TD><TD PORT="leds" ALIGN="LEFT">leds[7:0]</TD></TR>
+      </TABLE>
+    >];
+
+    {rank=same; fsm; dirlogic;}
+    {rank=same; counter; boundary; decoder;}
+
+    fsm -> dirlogic [style=invis, weight=2];
+    counter -> boundary [style=invis, weight=10];
+    boundary -> decoder [style=invis, weight=10];
+  }
+
+  clk_in [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLPADDING="4" COLOR="#2563EB">
+      <TR><TD BGCOLOR="#DBEAFE"><B>clk</B></TD></TR>
+    </TABLE>
+  >];
+
+  arst_in [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLPADDING="4" COLOR="#2563EB">
+      <TR><TD BGCOLOR="#DBEAFE"><B>arst</B></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT POINT-SIZE="9">async high</FONT></TD></TR>
+    </TABLE>
+  >];
+
+  en_in [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLPADDING="4" COLOR="#2563EB">
+      <TR><TD BGCOLOR="#DBEAFE"><B>en</B></TD></TR>
+    </TABLE>
+  >];
+
+  leds_out [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLPADDING="4" COLOR="#2563EB">
+      <TR><TD BGCOLOR="#DBEAFE"><B>leds[7:0]</B></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT POINT-SIZE="9">one-hot</FONT></TD></TR>
+    </TABLE>
+  >];
+
+  clk_in  -> counter:clk;
+  clk_in  -> fsm:clk [constraint=false];
+
+  arst_in -> counter:arst;
+  arst_in -> fsm:arst [constraint=false];
+
+  en_in   -> counter:en;
+
+  counter:count -> boundary:count [xlabel=<<FONT COLOR="#1F2937">q[3:0]</FONT>>];
+  boundary:pos -> fsm:pos;
+  boundary:pos -> dirlogic:pos;
+  boundary:pos -> decoder:sel;
+
+  fsm:dir -> dirlogic:dir [xlabel=<<FONT COLOR="#1F2937">dir</FONT>>];
+  dirlogic:next -> counter:dir [xlabel=<<FONT COLOR="#1F2937">dir_next</FONT>>];
+
+  decoder:leds -> leds_out;
+
+  {rank=same; clk_in; arst_in; en_in;}
+}
