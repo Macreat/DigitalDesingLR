@@ -1,0 +1,102 @@
+$date
+	Fri Oct 17 11:25:13 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_updown_counter4 $end
+$var wire 4 ! q [3:0] $end
+$var reg 1 " arst $end
+$var reg 1 # clk $end
+$var reg 1 $ dir $end
+$var reg 1 % en $end
+$scope module dut $end
+$var wire 1 " arst $end
+$var wire 1 # clk $end
+$var wire 1 $ dir $end
+$var wire 1 % en $end
+$var reg 4 & q [3:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 &
+0%
+1$
+0#
+1"
+b0 !
+$end
+#5000
+1#
+#6000
+1%
+0"
+#10000
+0#
+#15000
+b1 !
+b1 &
+1#
+#20000
+0#
+#25000
+b10 !
+b10 &
+1#
+#30000
+0#
+#35000
+b11 !
+b11 &
+1#
+#40000
+0#
+#45000
+b100 !
+b100 &
+1#
+#50000
+0#
+#55000
+b101 !
+b101 &
+1#
+#56000
+0$
+#60000
+0#
+#65000
+b100 !
+b100 &
+1#
+#70000
+0#
+#75000
+b11 !
+b11 &
+1#
+#80000
+0#
+#85000
+b10 !
+b10 &
+1#
+#86000
+0%
+#90000
+0#
+#95000
+1#
+#100000
+0#
+#105000
+1#
+#106000

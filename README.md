@@ -63,8 +63,14 @@ DigitalDesignLR/
 
 all inside content dir
 
-- **Class notes** → [`content/notesAboutClass/`](content/notesAboutClass/)
-- **Presentations** → [`content/classContent/`](content/classContent/)
+- **Class notes** → [`content/lectures/`](./content/lectures/)
+- **Presentations** → [`content/classContent/`](./content/classContent/)
+- **interest papers** → [`content/papers/`](./content/papers/)
+- **code from class** → [`content/code/`](./content/code/)
+
+- **work progress and deliverys** → [`workspace/`](./devEnv/work/)
+- **simulations** → [`simulations/`](./devEnv/sim/)
+
 - **Reference** → _Digital Design_ (M. Mano)
 - **Tools**: Icarus Verilog · GTKWave · VS Code
 
@@ -75,6 +81,7 @@ all inside content dir
 - [x] Create README base
 - [x] Structure repository
 - [ ] Develompent environment tasks
+- [ ] project advances
 
 ---
 
