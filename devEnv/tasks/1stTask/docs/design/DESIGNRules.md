@@ -11,6 +11,14 @@ This project implements four modules and their testbenches to create a Knight Ri
 
 All modules are under `src/`, testbenches under `tb/`, and a `Makefile` is provided.
 
+## Workflow summarize:
+
+- Modular design: first, clear interfaces for the 4 modules were defined.
+- Implementation: the modules were coded in `src/` with minimal, well-separated logic.
+- Verification: self-checking testbenches were created in `tb/` for each module and for the top-level.
+- Automation: a `Makefile` was added using a prompt, in order to build and run all tests.
+- Documentation: `docs/DESIGNRules.md` was written with the structural diagram and the testing strategy, plus `docs/AI_USAGE.md` with the AI usage statement and sources.
+
 ## Module Descriptions
 
 ### decoder3to8 (`src/decoder3to8.v`)
@@ -49,7 +57,7 @@ All modules are under `src/`, testbenches under `tb/`, and a `Makefile` is provi
   - `decoder3to8` converts `pos` to `leds` (one-hot).
 - Rationale: Keeps functionality modular and testable; top glues modules without duplicating logic.
 
-## Block Diagram (Structural)
+## Block Diagram (Structural) TOP MODULE
 
 ```
         +-----------------+        +------------------+
@@ -90,6 +98,7 @@ Run all tests with `make test`.
 
 ## AI Usage Disclosure
 
-- Assistant: OpenAI Codex CLI–based agent (this session).
-- Prompt strategy: define clear module specs and interfaces; tie behavior to boundaries; insist on self-checking testbenches and a Makefile; iterate structure-first, then tests, then docs.
-- Included: task statement (see `proof/1stTask/README.md`) and this design rationale.
+- Assistant: OpenAI Codex CLI–based agent.
+- Prompt strategy: define clear module specs and interfaces; tie behavior to boundaries; insist on self-checking testbenches and a Makefile; iterate structure-first, then tests, then docs, finally prompt help with theoric and basis analysis.
+
+- Included: task statement (see `tasks/1stTask/README.md`) and this design rationale.
