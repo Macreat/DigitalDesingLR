@@ -1,3 +1,4 @@
 content/code/*.v 
 content/code/*.tx
 
+devEnv/work/2cndAssignment/results/*.vcd 
