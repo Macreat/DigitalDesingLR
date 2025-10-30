@@ -1,9 +1,8 @@
 `timescale 1ns/1ps
-
 module uart_sampler #(
     parameter integer CLK_FREQ_HZ = 1_600_000,
     parameter integer BAUD_RATE   = 100_000
-) (
+)(
     input  wire clk,
     input  wire rst_n,
     input  wire rx,
@@ -13,89 +12,47 @@ module uart_sampler #(
     output reg  bit_data,
     output reg  framing_error,
     output reg  frame_done,
-    output wire busy
+    output reg  busy
 );
-    localparam [1:0] STATE_IDLE  = 2'd0;
-    localparam [1:0] STATE_START = 2'd1;
-    localparam [1:0] STATE_DATA  = 2'd2;
-    localparam [1:0] STATE_STOP  = 2'd3;
+    localparam integer BIT_TOTAL = 8;
+    reg [3:0] bit_count;
+    reg rx_d, rx_q;
 
-    reg [1:0] state;
-    reg [2:0] bit_index;
-    reg [2:0] rx_pipe;
+    // sincroniza rx al clk
+    always @(posedge clk) begin
+        rx_q <= rx_d;
+        rx_d <= rx;
+    end
 
-    wire rx_sync  = rx_pipe[2];
-    wire rx_prev  = rx_pipe[1];
-    wire start_edge = (rx_prev == 1'b1) && (rx_sync == 1'b0);
-
-    assign busy = (state != STATE_IDLE);
+    wire start_detected = (rx_q == 1 && rx_d == 0); // flanco 1→0
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            state         <= STATE_IDLE;
-            bit_index     <= 3'd0;
-            rx_pipe       <= 3'b111;  // Idle line is high.
-            align         <= 1'b0;
-            bit_valid     <= 1'b0;
-            bit_data      <= 1'b0;
-            framing_error <= 1'b0;
-            frame_done    <= 1'b0;
+            busy <= 0;
+            align <= 0;
+            bit_valid <= 0;
+            frame_done <= 0;
+            framing_error <= 0;
+            bit_count <= 0;
         end else begin
-            // Synchronize RX line to internal clock domain.
-            rx_pipe <= {rx_pipe[1:0], rx};
+            align <= 0;
+            bit_valid <= 0;
+            frame_done <= 0;
 
-            // Default pulse outputs.
-            align      <= 1'b0;
-            bit_valid  <= 1'b0;
-            frame_done <= 1'b0;
+            if (!busy && start_detected) begin
+                busy <= 1;
+                align <= 1;     // reinicia baud_gen
+                bit_count <= 0;
+            end else if (busy && tick) begin
+                bit_data <= rx_d;
+                bit_valid <= 1;
+                bit_count <= bit_count + 1;
 
-            case (state)
-                STATE_IDLE: begin
-                    framing_error <= 1'b0;
-                    bit_index     <= 3'd0;
-
-                    if (start_edge) begin
-                        state     <= STATE_START;
-                        align     <= 1'b1;
-                    end
+                if (bit_count == BIT_TOTAL - 1) begin
+                    busy <= 0;
+                    frame_done <= 1;
                 end
-
-                STATE_START: begin
-                    if (tick) begin
-                        if (rx_sync == 1'b0) begin
-                            state     <= STATE_DATA;
-                            bit_index <= 3'd0;
-                        end else begin
-                            // Start bit sampled high: treat as glitch.
-                            framing_error <= 1'b1;
-                            state         <= STATE_IDLE;
-                        end
-                    end
-                end
-
-                STATE_DATA: begin
-                    if (tick) begin
-                        bit_data  <= rx_sync;
-                        bit_valid <= 1'b1;
-
-                        if (bit_index == 3'd7) begin
-                            state     <= STATE_STOP;
-                        end else begin
-                            bit_index <= bit_index + 3'd1;
-                        end
-                    end
-                end
-
-                STATE_STOP: begin
-                    if (tick) begin
-                        framing_error <= (rx_sync == 1'b0);
-                        frame_done    <= 1'b1;
-                        state         <= STATE_IDLE;
-                    end
-                end
-
-                default: state <= STATE_IDLE;
-            endcase
+            end
         end
     end
 endmodule

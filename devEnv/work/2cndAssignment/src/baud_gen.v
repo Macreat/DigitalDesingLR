@@ -1,43 +1,34 @@
 `timescale 1ns/1ps
-
 module baud_gen #(
     parameter integer CLK_FREQ_HZ = 1_600_000,
     parameter integer BAUD_RATE   = 100_000
-) (
+)(
     input  wire clk,
     input  wire rst_n,
-    input  wire en,
-    input  wire align,
+    input  wire en,      // habilita conteo (activo cuando UART está recibiendo)
+    input  wire align,   // resetea contador al detectar start bit
     output reg  tick
 );
-    localparam integer HALF_PERIOD = CLK_FREQ_HZ / 2;
-
-    reg [31:0] phase_accum;
-    reg [32:0] next_phase;
+    localparam integer DIVISOR = CLK_FREQ_HZ / BAUD_RATE;
+    integer count;
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            phase_accum <= 32'd0;
-            tick        <= 1'b0;
-        end else begin
-            tick <= 1'b0;
-
-            if (!en) begin
-                phase_accum <= 32'd0;
-            end else if (align) begin
-                phase_accum <= HALF_PERIOD;
+            count <= 0;
+            tick  <= 0;
+        end else if (align) begin
+            count <= 0;
+            tick  <= 0;
+        end else if (en) begin
+            if (count == DIVISOR - 1) begin
+                count <= 0;
+                tick  <= 1;
             end else begin
-                // Accumulate baud increments and emit a tick whenever the accumulator wraps.
-                // This fractional-N approach keeps long-term frequency error close to zero.
-                next_phase = phase_accum + BAUD_RATE;
-
-                if (next_phase >= CLK_FREQ_HZ) begin
-                    tick        <= 1'b1;
-                    phase_accum <= next_phase - CLK_FREQ_HZ;
-                end else begin
-                    phase_accum <= next_phase[31:0];
-                end
+                count <= count + 1;
+                tick  <= 0;
             end
+        end else begin
+            tick <= 0;
         end
     end
 endmodule
