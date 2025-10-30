@@ -5,5 +5,5 @@ module detector (
     input  wire [3:0] pattern,
     output wire match
 );
-    assign match = (window == pattern);
+    assign match = (window == ~pattern);
 endmodule

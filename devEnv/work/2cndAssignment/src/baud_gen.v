@@ -1,8 +1,8 @@
 `timescale 1ns/1ps
 
 module baud_gen #(
-    parameter integer CLK_FREQ_HZ = 25_000_000,
-    parameter integer BAUD_RATE   = 115_200
+    parameter integer CLK_FREQ_HZ = 1_600_000,
+    parameter integer BAUD_RATE   = 100_000
 ) (
     input  wire clk,
     input  wire rst_n,

@@ -1,9 +1,9 @@
 `timescale 1ns/1ps
 
 module uart_pattern_top #(
-    parameter integer CLK_FREQ_HZ = 25_000_000,
-    parameter integer BAUD_RATE   = 115_200,
-    parameter integer ID_LAST_DIGIT = 7
+    parameter integer CLK_FREQ_HZ = 1_600_000,
+    parameter integer BAUD_RATE   = 100_000,
+    parameter integer ID_LAST_DIGIT = 6
 ) (
     input  wire clk,
     input  wire rst_n,
@@ -14,7 +14,7 @@ module uart_pattern_top #(
     output wire frame_done,
     output wire bit_strobe
 );
-    localparam [3:0] PATTERN = ID_LAST_DIGIT[3:0];
+    localparam [3:0] PATTERN = ID_LAST_DIGIT[3:0]; 
 
     initial begin
         if (ID_LAST_DIGIT < 0 || ID_LAST_DIGIT > 9) begin
@@ -28,9 +28,11 @@ module uart_pattern_top #(
     wire sampler_bit;
     wire sampler_busy;
     wire match_comb;
+    wire [3:0] window_next;
 
     reg match_toggle;
     reg [1:0] match_sync;
+    reg match_pending;
 
     baud_gen #(
         .CLK_FREQ_HZ (CLK_FREQ_HZ),
@@ -75,7 +77,20 @@ module uart_pattern_top #(
         .match   (match_comb)
     );
 
-    wire match_tick = sampler_bit_valid && match_comb;
+    assign window_next = {shift_window[2:0], sampler_bit};
+
+    // Latch the comparator result so the toggle runs one clock after the shift.
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            match_pending <= 1'b0;
+        end else if (sampler_bit_valid) begin
+            match_pending <= (window_next == PATTERN);
+        end else begin
+            match_pending <= 1'b0;
+        end
+    end
+
+    wire match_tick = match_pending;
     assign bit_strobe = sampler_bit_valid;
 
     always @(posedge clk or negedge rst_n) begin
