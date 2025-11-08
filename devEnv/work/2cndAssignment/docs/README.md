@@ -1,3 +1,3 @@
 # docs DIR
 
-reference documentation for project description
+reference documentation for task development
