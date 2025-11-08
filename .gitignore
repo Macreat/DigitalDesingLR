@@ -1,2 +1,5 @@
 content/code/*.v 
 content/code/*.txt
+
+
+devEnv/work/2cndAssignment/results/*.vcd 
