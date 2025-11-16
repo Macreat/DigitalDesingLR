@@ -2,19 +2,21 @@
 // Simple MIDI UART receiver for 31.25 kbaud streams.
 module midi_uart_rx #(
     parameter integer CLK_FREQ_HZ = 100_000_000,
-    parameter integer BAUD_RATE   = 31_250
+    parameter integer BAUD_RATE   = 31_250 //  Configure BAUD rate del receptor UART (detección de stop y bits¿?)
 ) (
+    
+    //
     input  wire clk,
     input  wire rst,
     input  wire rx,
-    output reg  [7:0] data_out,
-    output reg        data_valid,
+    output reg  [7:0] data_out, // this is the data byte to deliver 
+    output reg        data_valid, // 
     output reg        busy,
     output reg        framing_error
 );
 
-    localparam integer CLKS_PER_BIT = CLK_FREQ_HZ / BAUD_RATE;
-    localparam integer CTR_WIDTH    = $clog2(CLKS_PER_BIT + 1);
+    localparam integer CLKS_PER_BIT = CLK_FREQ_HZ / BAUD_RATE; // 
+    localparam integer CTR_WIDTH    = $clog2(CLKS_PER_BIT + 1); // 
 
     localparam [2:0] STATE_IDLE  = 3'd0;
     localparam [2:0] STATE_START = 3'd1;
