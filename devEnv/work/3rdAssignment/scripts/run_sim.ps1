@@ -21,7 +21,7 @@ $vvp      = "vvp"
 
 # RTL + TB paths
 $rtl = Join-Path $proj "rtl/src/"
-$tb  = Join-Path $proj "tb"
+$tb  = Join-Path $proj "rtl/tb/"
 
 # Output VVP file
 $out = Join-Path $build "tb_pwm_uart.vvp"
@@ -29,12 +29,12 @@ $out = Join-Path $build "tb_pwm_uart.vvp"
 Write-Host "Compiling testbench: tb_pwm_uart.v"
 & $iverilog -g2012 -Wall -I $rtl -o $out `
     (Join-Path $tb  "tb_pwm_uart.v") `
-    (Join-Path $rtl "uart_rx.v") `
-    (Join-Path $rtl "uart_tx.v") `
-    (Join-Path $rtl "cmd_parser.v") `
-    (Join-Path $rtl "pwm_core.v") `
-    (Join-Path $rtl "pwm_divider.v") `
-    (Join-Path $rtl "top_pwm_uart.v")
+    (Join-Path $rtl "uart/uart_rx.v") `
+    (Join-Path $rtl "uart/uart_tx.v") `
+    (Join-Path $rtl "cmdParser/cmd_parser.v") `
+    (Join-Path $rtl "pwm/pwm_core.v") `
+    (Join-Path $rtl "pwm/pwm_divider.v") `
+    (Join-Path $rtl "topModule/top_pwm_uart.v")
 
 Write-Host "Compilation done."
 
