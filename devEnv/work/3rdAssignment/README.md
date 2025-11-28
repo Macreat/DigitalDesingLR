@@ -16,31 +16,31 @@ The purpose of this assignment is to design, simulate, and verify a PWM generato
 
 The full system receives serial UART data at 115200 baud, stores incoming characters in a FIFO, and parses text-based commands to update internal PWM configuration registers.
 
-- The parameters:
+### The parameters:
 
-duty → duty cycle (0–99%)
+- duty → duty cycle (0–99%)
 
-pow2 → 2^N frequency scale
+- pow2 → 2^N frequency scale
 
-pow5 → 5^M frequency scale
+- pow5 → 5^M frequency scale
 
-determine the PWM frequency according to:
+- determine the PWM frequency according to:
 
-PWM_freq = 50 kHz / ( 2^pow2 · 5^pow5 )
+- PWM_freq = 50 kHz / ( 2^pow2 · 5^pow5 )
 
-- The command interface supports:
+### The command interface supports:
 
-HELP\n → prints list of valid commands
+- HELP\n → prints list of valid commands
 
-STATUS\n → prints duty, pow2, pow5, and resulting frequency
+- STATUS\n → prints duty, pow2, pow5, and resulting frequency
 
-DC##\n → updates duty (00–99)
+- DC##\n → updates duty (00–99)
 
-POW2#\n → sets pow2
+- POW2#\n → sets pow2
 
-POW5#\n → sets pow5
+- POW5#\n → sets pow5
 
-invalid strings → return FAIL
+- invalid strings → return FAIL
 
 ### Modules required
 
@@ -64,11 +64,11 @@ Each module includes a dedicated testbench verifying its behavior separately bef
 
 ## block diagram
 
-![block diagram](./docs/blockDiagramDIA.png)
+![block diagram](./docs/blockDiagram.png)
 
 ## Project delivered under `devEnv/work/2cndAssignment/`:
 
-- **basis REFERENCE DOCUMENTATION ** → [`REFERENCE DOC `](2cndAssignmentReferenceDoc.pdf)
+- **basis REFERENCE DOCUMENTATION ** → [`REFERENCE DOC `](3rdAssignmentReferenceDoc.pdf)
 
 - **build ** → [`build DIR `](build/) .vpp files
 - **results ** → [`results DIR `](results/) .jpg and .vcd GTKwave files
