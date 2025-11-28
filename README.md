@@ -74,7 +74,8 @@ all inside content dir
 
 - [x] Create README base
 - [x] Structure repository
-- [ ] Develompent environment tasks
+- [x] Develompent environment tasks
+- [ ] project
 
 ---
 
