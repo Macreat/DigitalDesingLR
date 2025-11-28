@@ -1,0 +1,156 @@
+#! /usr/bin/env python3
+#
+# UART decoder for GTKWave (Translate Filter Process)
+#
+# Usage:
+#   Right click signal → Data Format → Translate Filter Process → select this file
+#
+# Assumptions:
+#   - UART 8N1
+#   - Idle = 1
+#   - LSB first
+#   - You must set the BIT_TIME_NS value
+
+import sys
+
+# ====== USER CONFIG ======
+BIT_TIME_NS = 8680     # Ejemplo: para 115200 baud → 1/115200 = 8.68us = 8680ns
+# =========================
+
+last_val = 1
+state = "IDLE"
+bit_index = 0
+cur_byte = 0
+bit_timer = 0
+
+def decode_bit(bit):
+    global state, bit_index, cur_byte
+
+    if state == "IDLE":
+        if bit == 0:             # Start bit detected
+            state = "DATA"
+            bit_index = 0
+            cur_byte = 0
+        return None
+
+    elif state == "DATA":
+        cur_byte |= (bit << bit_index)
+        bit_index += 1
+
+        if bit_index == 8:
+            state = "STOP"
+        return None
+
+    elif state == "STOP":
+        # stop bit should be 1 but we tolerate anything
+        state = "IDLE"
+        return cur_byte
+
+# GTKWave filter protocol:
+for line in sys.stdin:
+    if line.startswith("@"):  # timestamp
+        timestamp = int(line[1:])
+        bit_timer = 0
+        print(line, end="")
+        continue
+
+    if line.startswith("$"):
+        print(line, end="")
+        continue
+
+    # line is a bit ("0" or "1")
+    val = int(line.strip())
+    bit_timer += 1
+
+    # Apply decoding on bit transitions every BIT_TIME_NS
+    if bit_timer * 1 >= BIT_TIME_NS:  
+        bit_timer = 0
+        byte = decode_bit(val)
+
+        if byte is not None:
+            if 32 <= byte <= 126:
+                decoded = f"ASCII '{chr(byte)}' (0x{byte:02X})"
+            else:
+                decoded = f"0x{byte:02X}"
+
+            print(decoded)
+        else:
+            print(line.strip())
+#! /usr/bin/env python3
+#
+# UART decoder for GTKWave (Translate Filter Process)
+#
+# Usage:
+#   Right click signal → Data Format → Translate Filter Process → select this file
+#
+# Assumptions:
+#   - UART 8N1
+#   - Idle = 1
+#   - LSB first
+#   - You must set the BIT_TIME_NS value
+
+import sys
+
+# ====== USER CONFIG ======
+BIT_TIME_NS = 8680     # Ejemplo: para 115200 baud → 1/115200 = 8.68us = 8680ns
+# =========================
+
+last_val = 1
+state = "IDLE"
+bit_index = 0
+cur_byte = 0
+bit_timer = 0
+
+def decode_bit(bit):
+    global state, bit_index, cur_byte
+
+    if state == "IDLE":
+        if bit == 0:             # Start bit detected
+            state = "DATA"
+            bit_index = 0
+            cur_byte = 0
+        return None
+
+    elif state == "DATA":
+        cur_byte |= (bit << bit_index)
+        bit_index += 1
+
+        if bit_index == 8:
+            state = "STOP"
+        return None
+
+    elif state == "STOP":
+        # stop bit should be 1 but we tolerate anything
+        state = "IDLE"
+        return cur_byte
+
+# GTKWave filter protocol:
+for line in sys.stdin:
+    if line.startswith("@"):  # timestamp
+        timestamp = int(line[1:])
+        bit_timer = 0
+        print(line, end="")
+        continue
+
+    if line.startswith("$"):
+        print(line, end="")
+        continue
+
+    # line is a bit ("0" or "1")
+    val = int(line.strip())
+    bit_timer += 1
+
+    # Apply decoding on bit transitions every BIT_TIME_NS
+    if bit_timer * 1 >= BIT_TIME_NS:  
+        bit_timer = 0
+        byte = decode_bit(val)
+
+        if byte is not None:
+            if 32 <= byte <= 126:
+                decoded = f"ASCII '{chr(byte)}' (0x{byte:02X})"
+            else:
+                decoded = f"0x{byte:02X}"
+
+            print(decoded)
+        else:
+            print(line.strip())

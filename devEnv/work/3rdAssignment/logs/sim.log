@@ -1,0 +1,285 @@
+VCD info: dumpfile dump.vcd opened for output.
+TB start
+Sending HELP
+TB uart_rx_i change to 0 at 390000
+UART_RX start detect
+TB uart_rx_i change to 1 at 35110000
+TB uart_rx_i change to 0 at 43790000
+TB uart_rx_i change to 1 at 61150000
+TB uart_rx_i change to 0 at 69830000
+TB uart_rx_i change to 1 at 78510000
+UART_RX byte 48
+TB uart_rx_i change to 0 at 95870000
+UART_RX start detect
+TB uart_rx_i change to 1 at 104550000
+TB uart_rx_i change to 0 at 113230000
+TB uart_rx_i change to 1 at 121910000
+TB uart_rx_i change to 0 at 130590000
+TB uart_rx_i change to 1 at 156630000
+TB uart_rx_i change to 0 at 165310000
+TB uart_rx_i change to 1 at 173990000
+UART_RX byte 45
+TB uart_rx_i change to 0 at 191350000
+UART_RX start detect
+TB uart_rx_i change to 1 at 217390000
+TB uart_rx_i change to 0 at 234750000
+TB uart_rx_i change to 1 at 252110000
+TB uart_rx_i change to 0 at 260790000
+TB uart_rx_i change to 1 at 269470000
+UART_RX byte 4c
+TB uart_rx_i change to 0 at 286830000
+UART_RX start detect
+TB uart_rx_i change to 1 at 330230000
+TB uart_rx_i change to 0 at 338910000
+TB uart_rx_i change to 1 at 347590000
+TB uart_rx_i change to 0 at 356270000
+TB uart_rx_i change to 1 at 364950000
+UART_RX byte 50
+TB uart_rx_i change to 0 at 382310000
+UART_RX start detect
+TB uart_rx_i change to 1 at 399670000
+TB uart_rx_i change to 0 at 408350000
+TB uart_rx_i change to 1 at 417030000
+TB uart_rx_i change to 0 at 425710000
+TB uart_rx_i change to 1 at 460430000
+UART_RX byte 0a
+TX_REQ idx=0 len=33 byte=48 type=2
+TX_REQ idx=0 len=33 byte=48 type=2
+UART_TX load byte 48
+DBG_TX_ACCEPT pulse 464950000 byte=00
+TB saw uart_tx_o start at 473630000
+Waiting HELP response
+TB saw uart_tx_o start at 517030000
+TB saw uart_tx_o start at 543070000
+TX_REQ idx=1 len=33 byte=45 type=2
+TX_REQ idx=1 len=33 byte=45 type=2
+UART_TX load byte 45
+DBG_TX_ACCEPT pulse 551790000 byte=48
+TB saw uart_tx_o start at 560470000
+TB saw uart_tx_o start at 577830000
+TB saw uart_tx_o start at 595190000
+TB saw uart_tx_o start at 629910000
+TX_REQ idx=2 len=33 byte=4c type=2
+TX_REQ idx=2 len=33 byte=4c type=2
+UART_TX load byte 4c
+DBG_TX_ACCEPT pulse 638630000 byte=45
+TB saw uart_tx_o start at 647310000
+TB saw uart_tx_o start at 690710000
+TB saw uart_tx_o start at 716750000
+TX_REQ idx=3 len=33 byte=50 type=2
+TX_REQ idx=3 len=33 byte=50 type=2
+UART_TX load byte 50
+DBG_TX_ACCEPT pulse 725470000 byte=4c
+TB saw uart_tx_o start at 734150000
+TB saw uart_tx_o start at 786230000
+TB saw uart_tx_o start at 803590000
+TX_REQ idx=4 len=33 byte=3a type=2
+TX_REQ idx=4 len=33 byte=3a type=2
+UART_TX load byte 3a
+DBG_TX_ACCEPT pulse 812310000 byte=50
+TB saw uart_tx_o start at 820990000
+TB saw uart_tx_o start at 847030000
+TB saw uart_tx_o start at 881750000
+TX_REQ idx=5 len=33 byte=20 type=2
+TX_REQ idx=5 len=33 byte=20 type=2
+UART_TX load byte 20
+DBG_TX_ACCEPT pulse 899150000 byte=3a
+TB saw uart_tx_o start at 907830000
+TB saw uart_tx_o start at 968590000
+TX_REQ idx=6 len=33 byte=44 type=2
+TX_REQ idx=6 len=33 byte=44 type=2
+UART_TX load byte 44
+DBG_TX_ACCEPT pulse 985990000 byte=20
+TB saw uart_tx_o start at 994670000
+TB saw uart_tx_o start at 1029390000
+TB saw uart_tx_o start at 1064110000
+TX_REQ idx=7 len=33 byte=43 type=2
+TX_REQ idx=7 len=33 byte=43 type=2
+UART_TX load byte 43
+DBG_TX_ACCEPT pulse 1072830000 byte=44
+TB saw uart_tx_o start at 1081510000
+TB saw uart_tx_o start at 1107550000
+TB saw uart_tx_o start at 1150950000
+TX_REQ idx=8 len=33 byte=23 type=2
+TX_REQ idx=8 len=33 byte=23 type=2
+UART_TX load byte 23
+DBG_TX_ACCEPT pulse 1159670000 byte=43
+TB saw uart_tx_o start at 1168350000
+TB saw uart_tx_o start at 1194390000
+TB saw uart_tx_o start at 1229110000
+TX_REQ idx=9 len=33 byte=23 type=2
+TX_REQ idx=9 len=33 byte=23 type=2
+UART_TX load byte 23
+DBG_TX_ACCEPT pulse 1246510000 byte=23
+TB saw uart_tx_o start at 1255190000
+TB saw uart_tx_o start at 1281230000
+TB saw uart_tx_o start at 1315950000
+TX_REQ idx=10 len=33 byte=2c type=2
+TX_REQ idx=10 len=33 byte=2c type=2
+UART_TX load byte 2c
+DBG_TX_ACCEPT pulse 1333350000 byte=23
+TB saw uart_tx_o start at 1342030000
+TB saw uart_tx_o start at 1385430000
+TB saw uart_tx_o start at 1402790000
+TX_REQ idx=11 len=33 byte=20 type=2
+TX_REQ idx=11 len=33 byte=20 type=2
+UART_TX load byte 20
+DBG_TX_ACCEPT pulse 1420190000 byte=2c
+TB saw uart_tx_o start at 1428870000
+TB saw uart_tx_o start at 1489630000
+TX_REQ idx=12 len=33 byte=50 type=2
+TX_REQ idx=12 len=33 byte=50 type=2
+UART_TX load byte 50
+DBG_TX_ACCEPT pulse 1507030000 byte=20
+TB saw uart_tx_o start at 1515710000
+TB saw uart_tx_o start at 1567790000
+TB saw uart_tx_o start at 1585150000
+TX_REQ idx=13 len=33 byte=4f type=2
+TX_REQ idx=13 len=33 byte=4f type=2
+UART_TX load byte 4f
+DBG_TX_ACCEPT pulse 1593870000 byte=50
+TB saw uart_tx_o start at 1602550000
+TB saw uart_tx_o start at 1645950000
+TB saw uart_tx_o start at 1671990000
+TX_REQ idx=14 len=33 byte=57 type=2
+TX_REQ idx=14 len=33 byte=57 type=2
+UART_TX load byte 57
+DBG_TX_ACCEPT pulse 1680710000 byte=4f
+TB saw uart_tx_o start at 1689390000
+TB saw uart_tx_o start at 1724110000
+TB saw uart_tx_o start at 1741470000
+TB saw uart_tx_o start at 1758830000
+TX_REQ idx=15 len=33 byte=32 type=2
+TX_REQ idx=15 len=33 byte=32 type=2
+UART_TX load byte 32
+DBG_TX_ACCEPT pulse 1767550000 byte=57
+TB saw uart_tx_o start at 1776230000
+TB saw uart_tx_o start at 1802270000
+TB saw uart_tx_o start at 1836990000
+TX_REQ idx=16 len=33 byte=23 type=2
+TX_REQ idx=16 len=33 byte=23 type=2
+UART_TX load byte 23
+DBG_TX_ACCEPT pulse 1854390000 byte=32
+TB saw uart_tx_o start at 1863070000
+TB saw uart_tx_o start at 1889110000
+TB saw uart_tx_o start at 1923830000
+TX_REQ idx=17 len=33 byte=2c type=2
+TX_REQ idx=17 len=33 byte=2c type=2
+UART_TX load byte 2c
+DBG_TX_ACCEPT pulse 1941230000 byte=23
+TB saw uart_tx_o start at 1949910000
+TB saw uart_tx_o start at 1993310000
+TB saw uart_tx_o start at 2010670000
+TX_REQ idx=18 len=33 byte=20 type=2
+TX_REQ idx=18 len=33 byte=20 type=2
+UART_TX load byte 20
+DBG_TX_ACCEPT pulse 2028070000 byte=2c
+TB saw uart_tx_o start at 2036750000
+TB saw uart_tx_o start at 2097510000
+TX_REQ idx=19 len=33 byte=50 type=2
+TX_REQ idx=19 len=33 byte=50 type=2
+UART_TX load byte 50
+DBG_TX_ACCEPT pulse 2114910000 byte=20
+TB saw uart_tx_o start at 2123590000
+TB saw uart_tx_o start at 2175670000
+TB saw uart_tx_o start at 2193030000
+TX_REQ idx=20 len=33 byte=4f type=2
+TX_REQ idx=20 len=33 byte=4f type=2
+UART_TX load byte 4f
+DBG_TX_ACCEPT pulse 2201750000 byte=50
+TB saw uart_tx_o start at 2210430000
+TB saw uart_tx_o start at 2253830000
+TB saw uart_tx_o start at 2279870000
+TX_REQ idx=21 len=33 byte=57 type=2
+TX_REQ idx=21 len=33 byte=57 type=2
+UART_TX load byte 57
+DBG_TX_ACCEPT pulse 2288590000 byte=4f
+TB saw uart_tx_o start at 2297270000
+TB saw uart_tx_o start at 2331990000
+TB saw uart_tx_o start at 2349350000
+TB saw uart_tx_o start at 2366710000
+TX_REQ idx=22 len=33 byte=35 type=2
+TX_REQ idx=22 len=33 byte=35 type=2
+UART_TX load byte 35
+DBG_TX_ACCEPT pulse 2375430000 byte=57
+TB saw uart_tx_o start at 2384110000
+TB saw uart_tx_o start at 2401470000
+TB saw uart_tx_o start at 2418830000
+TB saw uart_tx_o start at 2444870000
+TX_REQ idx=23 len=33 byte=23 type=2
+TX_REQ idx=23 len=33 byte=23 type=2
+UART_TX load byte 23
+DBG_TX_ACCEPT pulse 2462270000 byte=35
+TB saw uart_tx_o start at 2470950000
+TB saw uart_tx_o start at 2496990000
+TB saw uart_tx_o start at 2531710000
+TX_REQ idx=24 len=33 byte=2c type=2
+TX_REQ idx=24 len=33 byte=2c type=2
+UART_TX load byte 2c
+DBG_TX_ACCEPT pulse 2549110000 byte=23
+TB saw uart_tx_o start at 2557790000
+TB saw uart_tx_o start at 2601190000
+TB saw uart_tx_o start at 2618550000
+TX_REQ idx=25 len=33 byte=20 type=2
+TX_REQ idx=25 len=33 byte=20 type=2
+UART_TX load byte 20
+DBG_TX_ACCEPT pulse 2635950000 byte=2c
+TB saw uart_tx_o start at 2644630000
+TB saw uart_tx_o start at 2705390000
+TX_REQ idx=26 len=33 byte=53 type=2
+TX_REQ idx=26 len=33 byte=53 type=2
+UART_TX load byte 53
+DBG_TX_ACCEPT pulse 2722790000 byte=20
+TB saw uart_tx_o start at 2731470000
+TB saw uart_tx_o start at 2757510000
+TB saw uart_tx_o start at 2783550000
+TB saw uart_tx_o start at 2800910000
+TX_REQ idx=27 len=33 byte=54 type=2
+TX_REQ idx=27 len=33 byte=54 type=2
+UART_TX load byte 54
+DBG_TX_ACCEPT pulse 2809630000 byte=53
+TB saw uart_tx_o start at 2818310000
+TB saw uart_tx_o start at 2853030000
+TB saw uart_tx_o start at 2870390000
+TB saw uart_tx_o start at 2887750000
+TX_REQ idx=28 len=33 byte=41 type=2
+TX_REQ idx=28 len=33 byte=41 type=2
+UART_TX load byte 41
+DBG_TX_ACCEPT pulse 2896470000 byte=54
+TB saw uart_tx_o start at 2905150000
+TB saw uart_tx_o start at 2922510000
+TB saw uart_tx_o start at 2974590000
+TX_REQ idx=29 len=33 byte=54 type=2
+TX_REQ idx=29 len=33 byte=54 type=2
+UART_TX load byte 54
+DBG_TX_ACCEPT pulse 2983310000 byte=41
+TB saw uart_tx_o start at 2991990000
+TB saw uart_tx_o start at 3026710000
+TB saw uart_tx_o start at 3044070000
+TB saw uart_tx_o start at 3061430000
+TX_REQ idx=30 len=33 byte=55 type=2
+TX_REQ idx=30 len=33 byte=55 type=2
+UART_TX load byte 55
+DBG_TX_ACCEPT pulse 3070150000 byte=54
+TB saw uart_tx_o start at 3078830000
+TB saw uart_tx_o start at 3096190000
+TB saw uart_tx_o start at 3113550000
+TB saw uart_tx_o start at 3130910000
+TB saw uart_tx_o start at 3148270000
+TX_REQ idx=31 len=33 byte=53 type=2
+TX_REQ idx=31 len=33 byte=53 type=2
+UART_TX load byte 53
+DBG_TX_ACCEPT pulse 3156990000 byte=55
+TB saw uart_tx_o start at 3165670000
+TB saw uart_tx_o start at 3191710000
+TB saw uart_tx_o start at 3217750000
+TB saw uart_tx_o start at 3235110000
+TX_REQ idx=32 len=33 byte=0a type=2
+TX_REQ idx=32 len=33 byte=0a type=2
+UART_TX load byte 0a
+DBG_TX_ACCEPT pulse 3243830000 byte=53
+TB saw uart_tx_o start at 3252510000
+TB saw uart_tx_o start at 3278550000
+TB saw uart_tx_o start at 3295910000
+GLOBAL TIMEOUT
+A:\wnOs\LR\digitalDesignEnv\DigitalDesignDevEnv\repo\DigitalDesingLR\devEnv\work\3rdAssignment\rtl\tb\tb_pwm_uart.v:193: $finish called at 5000000000 (1ps)

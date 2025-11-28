@@ -80,8 +80,9 @@ all inside content dir
 
 - [x] Create README base
 - [x] Structure repository
-- [ ] Develompent environment tasks
-- [ ] project advances
+- [x] Develompent environment tasks
+- [x] project advances
+- [ ] project
 
 ---
 
