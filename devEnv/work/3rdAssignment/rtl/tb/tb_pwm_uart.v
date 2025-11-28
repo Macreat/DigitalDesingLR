@@ -272,6 +272,65 @@ module tb_pwm_uart;
         capture_response(line, len);
         expect_equals({"FAIL\n",8'h00}, line, len);
 
+         // Sweep POW2 and POW5
+        integer p2, p5;
+        for (p2 = 0; p2 <= 3; p2 = p2 + 1) begin
+            for (p5 = 0; p5 <= 3; p5 = p5 + 1) begin
+                $display("Set POW2=%0d POW5=%0d", p2, p5);
+                uart_send_string({"POW2", "0"+p2, "\n", 8'h00});
+                capture_response(line, len);
+                expect_equals({"OK\n",8'h00}, line, len);
+                uart_send_string({"POW5", "0"+p5, "\n", 8'h00});
+                capture_response(line, len);
+                expect_equals({"OK\n",8'h00}, line, len);
+                measure_period(measured_period);
+                if (measured_period != 1000 * (1<<p2) * ( (p5==0)?1:(p5==1)?5:(p5==2)?25:125) )
+                    begin $display("Bad period at POW2=%0d POW5=%0d", p2, p5); $finish; end
+            end
+        end
+
+        $display("Sending invalid POW2=4");
+        uart_send_string({"POW24\n",8'h00});
+        capture_response(line, len);
+        expect_equals({"FAIL\n",8'h00}, line, len);
+        if (pow2_o != 2'd3) begin $display("POW2 changed on invalid"); $finish; end
+
+                // POW2 test
+        $display("Sending POW23 (pow2 = 3)");
+        uart_send_string({"POW23\n",8'h00});
+        capture_response(line, len);
+        expect_equals({"OK\n",8'h00}, line, len);
+
+        if (pow2_o != 2'd3) begin
+            $display("ERROR: pow2_o expected 3 but got %0d", pow2_o);
+            $finish;
+        end
+
+        measure_period(measured_period);
+        if (measured_period != (1000 * 8)) begin  // 2^3 = 8
+            $display("ERROR: PWM period incorrect for pow2=3. Measured=%0d", measured_period);
+            $finish;
+        end
+        $display("POW2=3 OK, period=%0d", measured_period);
+
+        // POW5 test
+        $display("Sending POW52 (pow5 = 2)");
+        uart_send_string({"POW52\n",8'h00});
+        capture_response(line, len);
+        expect_equals({"OK\n",8'h00}, line, len);
+
+        if (pow5_o != 2'd2) begin
+            $display("ERROR: pow5_o expected 2 but got %0d", pow5_o);
+            $finish;
+        end
+
+        measure_period(measured_period);
+        if (measured_period != (1000 * 25)) begin  // 5^2 = 25
+            $display("ERROR: PWM period incorrect for pow5=2. Measured=%0d", measured_period);
+            $finish;
+        end
+        $display("POW5=2 OK, period=%0d", measured_period);
+
         $display("All tests passed");
         $finish;
     end
