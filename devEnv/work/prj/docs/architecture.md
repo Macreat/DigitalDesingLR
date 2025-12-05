@@ -8,6 +8,35 @@ El proyecto se divide en tres dominios logicos alineados con el documento `desig
 2. **Core de sintesis** - Implementa un oscilador DDS dual (carrier/modulador), tabla senoidal con cuantizacion Q1.15, la cadena FM (beta/feedback) y un generador de envolvente exponencial sencillo (ATA/DECAY/SUSTAIN).
 3. **Output / DSD** - Convierte las muestras firmadas a PWM (1 bit) compatible con el amplificador clase D de la Nexys Video A7 y expone un stub de DMA listo para reemplazarse por un AXI-DMA/MicroBlaze.
 
+## dir structure
+
+bash
+
+```
+src/
+ ├── entry/
+ │    ├── midi_uart_rx.v
+ │    ├── midi_parser.v
+ │    ├── knob_param_decoder.v
+ │    └── param_demux.v
+ ├── core/
+ │    ├── dds_core.sv
+ │    ├── adsr_env.sv
+ │    ├── lfo_mod.sv
+ │    ├── mixer.sv
+ │    └── wavegen.sv
+ ├── output/
+ │    ├── dsd_modulator.sv
+ │    ├── pwm_out.sv
+ │    └── amp_driver_stub.sv
+ ├── top/
+ │    └── midi_synth_top.sv
+ └── tb/
+      ├── tb_entry.sv
+      ├── tb_wavegen.sv
+      └── tb_synth_top.sv
+```
+
 ## Diagrama de bloques (alto nivel)
 
 ```mermaid
@@ -26,14 +55,14 @@ graph TD
 
 ## Senales clave por bloque
 
-| Bloque | Entradas principales | Salidas principales | Comentarios |
-| --- | --- | --- | --- |
-| `midi_uart_rx` | `clk100`, `rst`, `midi_rx` | `data_out[7:0]`, `data_valid` | Ajustar `CLK_FREQ_HZ` si se usa otro reloj. |
-| `knob_param_decoder` | `midi_data`, `midi_valid` | `param_addr`, `param_value`, `param_valid` | Usa bits `[6:4]` como selector (hasta 8 parametros simultaneos). |
-| `param_demux` | `param_addr/value/valid` | `phase_inc_base/mod`, `beta`, `gain`, `feedback`, `attack`, `sustain`, `decay`, `timbre_sel` | Contiene presets por defecto (432 Hz). |
-| `fm_synth` | Increments + ADSR + `gate` | `sample[15:0]`, `sample_valid` | Combina `phase_accumulator`, `sine_lut`, `envelope_gen`. |
-| `pwm_audio_out` | `sample[15:0]`, `clk` | `audio_pwm_p/n` | Modulacion de ancho de pulso unipolar; agregar filtro LC externo. |
-| `dma_stub` | `sample`, `sample_valid` | `last_written`, `ready` | Punto de insercion para AXI-DMA + MicroBlaze. |
+| Bloque               | Entradas principales       | Salidas principales                                                                          | Comentarios                                                       |
+| -------------------- | -------------------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `midi_uart_rx`       | `clk100`, `rst`, `midi_rx` | `data_out[7:0]`, `data_valid`                                                                | Ajustar `CLK_FREQ_HZ` si se usa otro reloj.                       |
+| `knob_param_decoder` | `midi_data`, `midi_valid`  | `param_addr`, `param_value`, `param_valid`                                                   | Usa bits `[6:4]` como selector (hasta 8 parametros simultaneos).  |
+| `param_demux`        | `param_addr/value/valid`   | `phase_inc_base/mod`, `beta`, `gain`, `feedback`, `attack`, `sustain`, `decay`, `timbre_sel` | Contiene presets por defecto (432 Hz).                            |
+| `fm_synth`           | Increments + ADSR + `gate` | `sample[15:0]`, `sample_valid`                                                               | Combina `phase_accumulator`, `sine_lut`, `envelope_gen`.          |
+| `pwm_audio_out`      | `sample[15:0]`, `clk`      | `audio_pwm_p/n`                                                                              | Modulacion de ancho de pulso unipolar; agregar filtro LC externo. |
+| `dma_stub`           | `sample`, `sample_valid`   | `last_written`, `ready`                                                                      | Punto de insercion para AXI-DMA + MicroBlaze.                     |
 
 ## Consideraciones para Nexys Video A7
 
@@ -49,7 +78,7 @@ graph TD
 
 ## Integracion futura
 
-1. Sustituir `dma_stub` por un DMA real con acceso a DDR/BRAM usando Vivado IP Integrator.
+1. **Sustituir `dma_stub` por un DMA real con acceso a DDR/BRAM usando Vivado IP Integrator.**
 2. Anadir una LUT exponencial real (o CORDIC) si se requiere la forma envolvente descrita (`e^{-t/t}`) en hardware.
 3. Implementar un bloque de interpolacion en `sine_lut` (o ampliar la profundidad a 1024 muestras) para reducir distorsion al reproducir 500 canales virtuales.
 4. Conectar los botones/knobs fisicos de la Nexys via interfaz PMOD o el MIDI-USB de un MicroBlaze auxiliar como describe el requisito original.

@@ -17,12 +17,12 @@ make clean        # limpia artefactos previos
 
 Los bancos de pruebas disponibles se encuentran en `tb/`:
 
-| Testbench | Cobertura |
-| --- | --- |
-| `tb/midi_uart_rx_tb.v` | UART/MIDI + sincronización de datos de entrada. |
-| `tb/fm_synth_tb.v` | Núcleo FM completo (DDS, LUT, ADSR). |
-| `tb/pwm_audio_out_tb.v` | Conversión PWM para la etapa de salida. |
-| `tb/nexys_audio_top_tb.v` | Integración Entry → Core → Output. |
+| Testbench                 | Cobertura                                       |
+| ------------------------- | ----------------------------------------------- |
+| `tb/midi_uart_rx_tb.v`    | UART/MIDI + sincronización de datos de entrada. |
+| `tb/fm_synth_tb.v`        | Núcleo FM completo (DDS, LUT, ADSR).            |
+| `tb/pwm_audio_out_tb.v`   | Conversión PWM para la etapa de salida.         |
+| `tb/nexys_audio_top_tb.v` | Integración Entry → Core → Output.              |
 
 Para apuntar a uno en específico define la variable `TB` al invocar `make run`.
 

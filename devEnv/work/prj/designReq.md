@@ -57,5 +57,6 @@ ON LINUX ENVIRONMENT, this is usefull to :
 - protocol of communication using ssh and then,
 - using the console and UART methods, we can configurate and got some points FOR TE RASP - PI 3 MODEL B
   the amplificator D type is used to amplify the audio output
-s
+  s
+
 # verification desing for next lecture (advances ¿? )
