@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../../../../../prgs/developTools/nexysV/2025.1/Vivado/data/rsb/busdef" \
+"../../../../../../../../LR/digitalDesignEnv/DigitalDesignDevEnv/repo/DigitalDesingLR/devEnv/sim/sineGen/src/zCode/src/pcm_to_dsd.v" \
+"../../../../../../../../LR/digitalDesignEnv/DigitalDesignDevEnv/repo/DigitalDesingLR/devEnv/sim/sineGen/src/zCode/tb/pcm_to_dsd_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

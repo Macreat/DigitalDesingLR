@@ -1,12 +1,13 @@
 `timescale 1ns / 1ps
 
 module pcm_to_dsd_tb;
+
     localparam integer SAMPLE_WIDTH = 24;
     localparam integer CLK_PERIOD   = 10;          // 100 MHz
     localparam integer DSD_FREQ_HZ  = 3_125_000;
     localparam integer OSR          = 64;
     localparam real    TONE_HZ      = 1000.0;
-    localparam real    PCM_FS_HZ    = DSD_FREQ_HZ / real'(OSR); // ~48.8 kHz
+    localparam real    PCM_FS_HZ    = DSD_FREQ_HZ / real(OSR); 
     localparam real    TWO_PI       = 6.283185307179586;
     localparam integer AMP          = (1 << (SAMPLE_WIDTH-1)) - 1;
 
@@ -37,12 +38,13 @@ module pcm_to_dsd_tb;
         .dsd_ce    (dsd_ce)
     );
 
+    // Registrar solo señales clave para evitar archivos enormes
     initial begin
         $dumpfile("pcm_to_dsd_tb.vcd");
-        $dumpvars(0, pcm_to_dsd_tb);
+        $dumpvars(1, pcm_to_dsd_tb.dsd_bit);
+        $dumpvars(1, pcm_to_dsd_tb.pcm_sample);
     end
 
-    // Simple sine source (updates when the modulator asks for a new PCM sample).
     always @(posedge clk) begin
         if (rst) begin
             pcm_sample <= 0;
@@ -58,10 +60,13 @@ module pcm_to_dsd_tb;
         end
     end
 
+    // Simulación muy larga: 1 segundo de tiempo simulado
     initial begin
         #(20*CLK_PERIOD);
         rst <= 1'b0;
-        #(5_000_000); // run long enough to observe several ms of DSD stream
+
+        #(1_000_000_000); // 1 segundo
         $finish;
     end
+
 endmodule
