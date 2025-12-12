@@ -9,8 +9,9 @@ module sine_wave_ob #(
     input  wire                     clk,
     input  wire                     rst,                  // activo en alto
     input  wire [INDEX_BITS-1:0]    step,                 // incremento de fase (ahora más bits)
-    output reg signed [AMP_BITS-1:0] sine_out              // -32768..32767, centro=0
+    output reg signed [AMP_BITS-1:0] sine_out             // -32768..32767, centro=0
 );
+
     localparam integer QSIZE   = 1 << TABLE_BITS;         // tamaño del cuarto de ciclo
     localparam signed [AMP_BITS-1:0] CENTER = 0;          // centro con signo
     
@@ -119,7 +120,10 @@ module sine_wave_ob #(
 
     // Salida registrada
     always @(posedge clk or posedge rst) begin
-        if (rst)   sine_out <= CENTER;
-        else       sine_out <= next_value;
-        end
+        if (rst)   
+            sine_out <= CENTER;
+        else       
+            sine_out <= next_value;
+    end
+
 endmodule
