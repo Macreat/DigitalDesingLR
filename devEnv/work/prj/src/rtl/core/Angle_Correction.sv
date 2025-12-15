@@ -1,3 +1,10 @@
+/**
+ * @brief This module performs multiplication of an unsigned 8-bit value and a signed 16-bit value, with shifting.
+ * @author Santiago Bustamante Montoya
+ * @param u8 Unsigned 8-bit input
+ * @param s16 Signed 16-bit input
+ * @param result Signed 16-bit output result
+ */
 module mul_u8_s16_shifted (
     input      [7:0]     u8,        // unsigned
     input signed [15:0]  s16,       // signed

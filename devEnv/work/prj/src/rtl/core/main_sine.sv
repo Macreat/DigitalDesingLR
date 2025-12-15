@@ -1,3 +1,13 @@
+/**
+ * @brief Main FM synthesis module that generates modulated sine wave output.
+ * @author Santiago Bustamante Montoya
+ * @param clk System clock (125 MHz)
+ * @param rst Reset signal
+ * @param Fm 9-bit modulating frequency input
+ * @param Fc 13-bit carrier frequency input
+ * @param Beta 8-bit modulation index input
+ * @param out Signed 16-bit final FM audio output
+ */
 module main_sine (
     input  wire        clk,      // System Clock (125 MHz)
     input  wire        rst,      // Reset
