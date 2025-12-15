@@ -1,6 +1,6 @@
 /**
  * @brief Main FM synthesis module that generates modulated sine wave output.
- * @author Santiago Bustamante Montoya
+ * @author Santiago Bustamante Montoya, Juan Esteban Granada Cardona
  * @param clk System clock (125 MHz)
  * @param rst Reset signal
  * @param Fm 9-bit modulating frequency input

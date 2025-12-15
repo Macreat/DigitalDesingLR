@@ -1,6 +1,6 @@
 /**
  * @brief Accumulator module for Fc to Angle conversion, performing multiplication and accumulation with MSB output.
- * @author Santiago Bustamante Montoya
+ * @author Santiago Bustamante Montoya, Juan Esteban Granada Cardona
  * @param clk Clock input
  * @param rst Reset input
  * @param f 13-bit input frequency value

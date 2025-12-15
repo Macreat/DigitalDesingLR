@@ -1,6 +1,6 @@
 /**
  * @brief Beat sequencer module that cycles through four tone inputs at a slow rate.
- * @author Santiago Bustamante Montoya
+ * @author Santiago Bustamante Montoya, Juan Esteban Granada Cardona
  * @param clk 2^16 = 65536 Hz clock input
  * @param rst Synchronous reset input
  * @param tone0_in First 8-bit tone input (expected: 0 or 127)
