@@ -3,3 +3,7 @@ content/code/*.txt
 
 
 devEnv/work/2cndAssignment/results/*.vcd 
+
+devEnv/work/project/sim/build/nexys_audio_top_tb.vcd
+
+

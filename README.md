@@ -70,6 +70,7 @@ all inside content dir
 
 - **work progress and deliverys** → [`workspace/`](./devEnv/work/)
 - **simulations** → [`simulations/`](./devEnv/sim/)
+- **project** → [`project/`](./devEnv/work/project/)
 
 - **Reference** → _Digital Design_ (M. Mano)
 - **Tools**: Icarus Verilog · GTKWave · VS Code
@@ -82,7 +83,7 @@ all inside content dir
 - [x] Structure repository
 - [x] Develompent environment tasks
 - [x] project advances
-- [ ] project
+- [x] project
 
 ---
 
