@@ -37,17 +37,11 @@ DigitalDesignLR/
 │ └── ...  
 │  
 ├── devEnv/ # Scripts and testing environments , als work to deliver
-│ ├── work/ # First projects  
-│ └── sim/ # Simulation scripts  
+│ ├── work/ # project
+
 │ └── ...  
 │
 └── README.md
-
----
-
-## Projects and Modules description
-
-- **First task** → Four verilog modules (design and verification of a basic digital system divide into four modules, test benchs and a top level integration).
 
 ---
 
@@ -63,8 +57,8 @@ DigitalDesignLR/
 
 all inside content dir
 
-- **Class notes** → [`content/notesAboutClass/`](content/notesAboutClass/)
-- **Presentations** → [`content/classContent/`](content/classContent/)
+- **project** → [`project`](devEnv/work/project/)
+
 - **Reference** → _Digital Design_ (M. Mano)
 - **Tools**: Icarus Verilog · GTKWave · VS Code
 
@@ -75,7 +69,7 @@ all inside content dir
 - [x] Create README base
 - [x] Structure repository
 - [x] Develompent environment tasks
-- [ ] project
+- [-] project
 
 ---
 
